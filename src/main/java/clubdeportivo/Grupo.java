@@ -45,32 +45,38 @@ public class Grupo {
 		return nplazas-nmatriculados;
 	}
 	
-	public void actualizarPlazas(int n) throws ClubException { 
-		if (n<=0 || n < nmatriculados) {
-			throw new ClubException("ERROR: número de plazas negativo.");
+	public void actualizarPlazas(int n) throws ClubException {
+		if (n <= 0 || n < nmatriculados) {  
+			throw new ClubException("ERROR: número de plazas inválido.");
 		}
-		nplazas=n;		
+		nplazas = n;
 	}
 	
+	
 	public void matricular(int n) throws ClubException {
-		if (plazasLibres()< n || n<=0) {
-			throw new ClubException("ERROR: no hay plazas libres suficientes, plazas libre: "+ plazasLibres()+ " y matriculas: "+n);
+		if (n <= 0) {
+			throw new ClubException("ERROR: número de matriculados inválido.");
 		}
-		nmatriculados+=n;
+		if (plazasLibres() < n) {
+			throw new ClubException("ERROR: no hay plazas libres suficientes. Plazas libres: " 
+									+ plazasLibres() + ", intento de matrícula: " + n);
+		}
+		nmatriculados += n;
 	}
+	
 	
 	public String toString() {
 		return "("+ codigo + " - "+actividad+" - " + tarifa + " euros "+ "- P:" + nplazas +" - M:" +nmatriculados+")";
 	}
 	
 	public boolean equals(Object o) {
-		boolean ok=false;
-		if (o instanceof Grupo) {
-			Grupo otro = (Grupo) o;
-			ok = this.codigo.equalsIgnoreCase(otro.codigo) && this.actividad.equalsIgnoreCase(otro.actividad);
-		}
-		return ok;
+		if (o == null) return false;  
+		if (!(o instanceof Grupo)) return false;
+		Grupo otro = (Grupo) o;
+		return this.codigo.equalsIgnoreCase(otro.codigo) &&
+			   this.actividad.equalsIgnoreCase(otro.actividad);
 	}
+	
 	
 	public int hashCode() {
 		return codigo.toUpperCase().hashCode()+actividad.toUpperCase().hashCode();

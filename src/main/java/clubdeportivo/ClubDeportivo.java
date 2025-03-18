@@ -60,13 +60,14 @@ public class ClubDeportivo {
 		int p = 0;
 		int i = 0;
 		while (i < ngrupos) {
-			if (grupos[i].getActividad().equals(actividad)) {
+			if (grupos[i] != null && grupos[i].getActividad().equals(actividad)) {  
 				p += grupos[i].plazasLibres();
 			}
 			i++;
 		}
 		return p;
 	}
+	
 
 	public void matricular(String actividad, int npersonas) throws ClubException {
 		int plazas = plazasLibres(actividad);
@@ -92,11 +93,14 @@ public class ClubDeportivo {
 		double cantidad = 0.0;
 		int i = 0;
 		while (i < ngrupos) {
-			cantidad += grupos[i].getTarifa() * grupos[i].getMatriculados();
+			if (grupos[i] != null) {  
+				cantidad += grupos[i].getTarifa() * grupos[i].getMatriculados();
+			}
 			i++;
 		}
 		return cantidad;
 	}
+	
 
 	public String toString() {
 		StringJoiner sj = new StringJoiner(", ", "[ ", " ]");
