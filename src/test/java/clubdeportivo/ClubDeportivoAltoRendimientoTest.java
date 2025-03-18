@@ -11,7 +11,7 @@ public class ClubDeportivoAltoRendimientoTest {
     @BeforeEach
     public void setUp() throws ClubException {
         club = new ClubDeportivo("Test Club", 5);
-        clubAltoRendimiento = new ClubDeportivoAltoRendimiento("Alto Rendimiento", 5, 15, 10.0);
+        clubAltoRendimiento = new ClubDeportivoAltoRendimiento("Alto Rendimiento", 5, 20, 10.0);
     }
 
     @Test
